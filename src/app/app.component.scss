@@ -1,0 +1,47 @@
+$sizeButton: 100px;
+
+table, mat-paginator, mat-paginator, .buttonPosition {
+  width: 50%;
+  margin: auto;
+}
+@media screen and (min-width: 320px ) and (max-width:768px) {
+  table, mat-paginator, mat-paginator, .buttonPosition {
+    width: 100%;
+  }
+}
+
+button {
+  background-color: #fffbd5 !important;
+  font-size: 60px;
+  width: 100px;
+  height: 70px;
+  color: #ffffff !important;
+}
+
+mat-paginator {
+  background-color: #fffbd5 !important;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.imgEdit {
+  width: 20px;
+  height: 20px;
+}
+
+.imgDel, .imgAdd {
+  width: 40px;
+  height: 40px;
+}
+
+.buttonPosition {
+  display: flex;
+  justify-content: space-between;
+}
+
