@@ -1,39 +1,48 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div *ngIf="!showAddBookMark">
+  <div *ngIf="loading && !bookmarkShow">
+    <app-loading></app-loading>
+  </div>
 
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <mat-checkbox></mat-checkbox>
-    </td>
-  </ng-container>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!loading">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"><mat-checkbox></mat-checkbox></td>
+    </ng-container>
 
-  <ng-container matColumnDef="bookmark">
-    <th mat-header-cell *matHeaderCellDef> Tags </th>
-    <td mat-cell *matCellDef="let element"> {{element.bookmark}} </td>
-  </ng-container>
+    <ng-container matColumnDef="date_bookmark">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element; let i = index" (click)="getRowId(i)">{{element.date_bookmark}}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="priority">
-    <th mat-header-cell class="textRight" *matHeaderCellDef> Edit </th>
-    <td mat-cell class="textRight" *matCellDef="let element">
-      <img class="imgEdit" src="../assets/images/edit.svg" alt="">
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="tag">
+      <th mat-header-cell *matHeaderCellDef> Tags </th>
+      <td mat-cell *matCellDef="let element; let i = index" (click)="getRowId(i)"> {{element.tag}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [ngStyle]="{'background-color':
+  getColor(i) == 1 ?'#FCB2AC' : getColor(i) == 2 ? '#F9F9AE' : '#CBFFBD'}"></tr>
 
-</table>
+  </table><br>
 
-<br>
+  <app-bookmark *ngIf="bookmarkShow" [rowId]="rowId"></app-bookmark>
 
-<mat-paginator [length]="100"
-               [pageSize]="10"
-               [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
+  <app-paginator *ngIf="!bookmarkShow" (onChanged)="onChanged($event)" [pageEventParent]="pageEvent"></app-paginator><br>
+</div>
 
-<br>
+<app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)"></app-add-bookmark>
 
 <div class="buttonPosition">
-  <button mat-raised-button><img class="imgAdd" src="../assets/images/add.svg" alt=""></button>
-  <button mat-raised-button><img class="imgDel" src="../assets/images/delete.svg" alt=""></button>
+  <button mat-raised-button *ngIf="showAddBookMarkButton" (click)="addBookMark()">
+    <img class="imgButton" src="../assets/images/add.svg" alt="">
+  </button>
+  <button mat-raised-button *ngIf="backButton" (click)="back()">
+    <img class="imgButton" src="../assets/images/back.svg" alt="">
+  </button>
+  <button mat-raised-button *ngIf="bookmarkShow">
+    <img class="imgButton" src="../assets/images/edit.svg" alt="">
+  </button>
+  <button mat-raised-button *ngIf="deleteButton">
+    <img class="imgButton" src="../assets/images/delete.svg" alt="">
+  </button>
 </div>
