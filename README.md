@@ -9,6 +9,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+# Requirements
+
+Disable origin policy in Chrome:
+
+Run google chrome linux comand: google-chrome --disable-web-security --user-data-dir="[some directory here]"
+
+# Задание
+
+Создать приложение - записную книжку разработчика.
+Со следующим функционалом:
+1) создание заметки (заголовок, приоритет (высокий, нормальный, низкий), дата выполнения) - выполнено
+2) просмотр всех заметок в виде таблицы с возможностью постраничной пагинации - выполнено
+3) просмотр ранее сохраненной заметки - выполнено
+4) реализовать back-end (любой стек, опционально) - выполнено
+
+При реализации использовать:
+angular6+, angular material 6+
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
