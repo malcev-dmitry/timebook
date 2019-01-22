@@ -1,0 +1,7 @@
+<div class="content__cap" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<div *ngIf='message' class="bookmark" [ngStyle]="{'background-color' : color}">
+  <span>{{message}}</span>
+</div>
