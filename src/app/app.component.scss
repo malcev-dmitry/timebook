@@ -10,16 +10,28 @@ table, mat-paginator, mat-paginator, .buttonPosition {
   }
 }
 
+td, th {
+  padding: 10px !important;
+}
+
+th, tr:hover {
+  background-color: #c3c5ff !important;
+}
+
+tr:active {
+  background-color: #557ccc !important;
+}
+
 button {
-  background-color: #fffbd5 !important;
+  background-color: #ffe19f !important;
   font-size: 60px;
   width: 100px;
   height: 70px;
-  color: #ffffff !important;
 }
 
 mat-paginator {
-  background-color: #fffbd5 !important;
+  background-color: #FDDAA5 !important;
+  border-radius: 20px !important;
 }
 
 .textRight {
@@ -30,12 +42,7 @@ mat-paginator {
   text-align: left;
 }
 
-.imgEdit {
-  width: 20px;
-  height: 20px;
-}
-
-.imgDel, .imgAdd {
+.imgButton {
   width: 40px;
   height: 40px;
 }

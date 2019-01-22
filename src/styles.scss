@@ -1,5 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+@font-face{
+  font-family: MullerMedium;
+  src: url(./assets/fonts/MullerMedium.otf);
+}
+
 body {
-  background-color: #9bbcff;
+  background-color: #b0a5ff;
+  font-family: MullerMedium;
 }
