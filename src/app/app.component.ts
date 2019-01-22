@@ -1,30 +1,120 @@
-import {Component} from '@angular/core';
-
-export interface PeriodicElement {
-  bookmark: string;
-  position: number;
-  priority: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, bookmark: 'Hydrogen', priority: 1},
-  {position: 2, bookmark: 'Helium', priority: 2},
-  {position: 3, bookmark: 'Lithium', priority: 3},
-  {position: 4, bookmark: 'Beryllium', priority: 1},
-  {position: 5, bookmark: 'Boron', priority: 2},
-  {position: 6, bookmark: 'Carbon', priority: 3},
-  {position: 7, bookmark: 'Nitrogen', priority: 1},
-  {position: 8, bookmark: 'Oxygen', priority: 2},
-  {position: 9, bookmark: 'Fluorine', priority: 3},
-  {position: 10, bookmark: 'Neon', priority: 1},
-];
+import { Component } from '@angular/core';
+import { ApiService } from './apiService';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  displayedColumns: string[] = ['position', 'bookmark', 'priority'];
-  dataSource = ELEMENT_DATA;
+export class AppComponent implements OnInit {
+  constructor(private api: ApiService) {}
+
+  ELEMENT_DATA: object;
+  displayedColumns: string[];
+  dataSource: object;
+
+  // видимость элементов
+  loading: boolean = true;
+  bookmarkShow: boolean = false;
+  showAddBookMark: boolean = false;
+  showAddBookMarkButton: boolean = true;
+  deleteButton: boolean = true;
+  backButton: boolean = false;
+
+  rowId: number;
+
+  // default for select bd
+  id: number = 0;
+  limit: number = 5;
+
+  pageEvent: object = {'previousPageIndex' : 0, 'pageIndex' : 0, 'pageSize' : this.limit};
+
+  editDate() {
+    let shortDate: Date;
+    let data: object = JSON.parse(localStorage['bookmarks']);
+    const month: string[] = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
+                              'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    for (let key in data) {
+      shortDate = new Date(data[key]['date_bookmark']);
+      data[key]['date_bookmark'] = `${shortDate.getDate()}
+      ${month[shortDate.getMonth()]} ${shortDate.getFullYear()} г.`;
+    }
+    localStorage.removeItem('date_bookmark');
+    localStorage.clear();
+    localStorage['bookmarks'] = JSON.stringify(data);
+  }
+
+  getColor(id: number) {
+    const color: number = this.ELEMENT_DATA[id]['priority'];
+    return color;
+  }
+
+  getRowId(rowIdLocalStorage: number) {
+    this.rowId = rowIdLocalStorage;
+    this.loading = true;
+    this.bookmarkShow = true;
+    this.showAddBookMark = false;
+    this.showAddBookMarkButton = false;
+    this.deleteButton = true;
+    this.backButton = true;
+  }
+
+  back() {
+    this.showAddBookMarkButton = true;
+    this.showAddBookMark = false;
+    this.bookmarkShow = false;
+    this.deleteButton = true;
+    this.backButton = false;
+    this.loading = false;
+  }
+
+  addBookMark() {
+    this.showAddBookMarkButton = false;
+    this.showAddBookMark = true;
+    this.bookmarkShow = false;
+    this.deleteButton = false;
+    this.backButton = false;
+    this.loading = false;
+  }
+
+  start() {
+    this.api.getIntervalRows(this.id, this.limit);
+
+    setTimeout(() => {
+      this.editDate();
+
+      // вызывается спец.здесь, т.к. localstorage очищается в editDate()
+      this.api.getCountRows();
+    }, 300);
+
+    setTimeout(() => {
+      this.ELEMENT_DATA = JSON.parse(localStorage['bookmarks']);
+      this.displayedColumns = ['id', 'date_bookmark', 'tag'];
+      this.dataSource = this.ELEMENT_DATA;
+      this.loading = false;
+    }, 600);
+  }
+
+  onChanged(pageEvent: object) {
+    this.id = pageEvent['pageIndex'] * pageEvent['pageSize'];
+    this.limit = pageEvent['pageSize'];
+    this.pageEvent = pageEvent;
+    this.start();
+  }
+
+  onChangedForButtonOk(pageEvent: boolean) {
+    if (pageEvent) {
+      this.showAddBookMarkButton = true;
+      this.showAddBookMark = false;
+      this.bookmarkShow = false;
+      this.deleteButton = true;
+      this.backButton = false;
+      this.loading = false;
+    }
+  }
+
+  ngOnInit() {
+    this.start();
+  }
 }
