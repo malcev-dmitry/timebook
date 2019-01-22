@@ -18,6 +18,10 @@ Run google chrome linux comand: google-chrome --disable-web-security --user-data
 backend находится в отдельном репозитории: https://github.com/malcev-dmitry/apiRest.git
 Его необходимо скачать и запустить через npm run start
 
+Должен быть установлен Mysql
+
+БД: https://github.com/malcev-dmitry/timebook/blob/master/src/assets/api.sql
+
 # Задание
 
 Создать приложение - записную книжку разработчика.
