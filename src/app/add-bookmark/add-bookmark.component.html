@@ -1,0 +1,50 @@
+<div class="container padding">
+  <form class="container" [formGroup]="options" (ngSubmit)="onAddBookmarkChange()">
+
+    <div>
+      <label>Приоритет</label>
+      <mat-radio-group name="priority" (change)="onChange($event)">
+        <mat-radio-button value="1" [checked]=true>Высокий</mat-radio-button>
+        <mat-radio-button value="2">Средний</mat-radio-button>
+        <mat-radio-button value="3">Низкий</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field [floatLabel]="options.value.floatLabel">
+      <input matInput type="text" formControlName="tag" placeholder="Тег"
+             [ngClass]="{ 'is-invalid': submitted && f.tag.errors }" required>
+      <div *ngIf="submitted && f.tag.errors" class="invalid-feedback">
+        <div *ngIf="f.tag.errors.required">Корректно заполните поле Тег</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field [floatLabel]="options.value.floatLabel">
+      <input matInput type="text" formControlName="title" placeholder="Заметка"
+             [ngClass]="{ 'is-invalid': submitted && f.title.errors }" required>
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Корректно заполните поле Заметка</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field [floatLabel]="options.value.floatLabel">
+      <input matInput formControlName="date_bookmark" [matDatepicker]="picker" placeholder="Дата"
+             [ngClass]="{ 'is-invalid': submitted && f.date_bookmark.errors }" required>
+      <div *ngIf="submitted && f.date_bookmark.errors" class="invalid-feedback">
+        <div *ngIf="f.date_bookmark.errors.required">Корректно заполните поле Дата</div>
+      </div>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+</div><br>
+
+<div class="flex">
+  <button mat-raised-button (click)="onBack()" type="submit">
+    <img class="imgButton" src="../../assets/images/back.svg" alt="">
+  </button>
+
+  <button mat-raised-button (click)="onAddBookmarkChange()">
+    <img class="imgButton" src="../../assets/images/ok.svg" alt="">
+  </button>
+</div>
