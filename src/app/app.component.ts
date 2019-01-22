@@ -92,12 +92,12 @@ export class AppComponent implements OnInit {
     this.api.getIntervalRows(this.id, this.limit);
 
     setTimeout(() => {
+      this.loading = true;
       this.editDate();
 
       // вызывается спец.здесь, т.к. localstorage очищается в editDate()
       this.api.getCountRows();
     }, 300);
-
     this.redrawing();
   }
 
@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
 
   onChangedForButtonOk(pageEvent: boolean) {
     if (pageEvent) {
+      setTimeout(() => { this.editDate(); this.api.getCountRows(); }, 300);
       this.redrawing();
       this.showAddBookMarkButton = true;
       this.showAddBookMark = false;
