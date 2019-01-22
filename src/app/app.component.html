@@ -30,7 +30,7 @@
   <app-paginator *ngIf="!bookmarkShow" (onChanged)="onChanged($event)" [pageEventParent]="pageEvent"></app-paginator><br>
 </div>
 
-<app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)"></app-add-bookmark>
+<app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)" [pageEventParent]="pageEvent"></app-add-bookmark>
 
 <div class="buttonPosition">
   <button mat-raised-button *ngIf="showAddBookMarkButton" (click)="addBookMark()">

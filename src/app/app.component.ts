@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
       data[key]['date_bookmark'] = `${shortDate.getDate()}
       ${month[shortDate.getMonth()]} ${shortDate.getFullYear()} г.`;
     }
+    // скопировали данные в localstorage, изменили дату, перезаписали localstorage
     localStorage.removeItem('date_bookmark');
     localStorage.clear();
     localStorage['bookmarks'] = JSON.stringify(data);
@@ -78,6 +79,15 @@ export class AppComponent implements OnInit {
     this.loading = false;
   }
 
+  redrawing() {
+    setTimeout(() => {
+      this.ELEMENT_DATA = JSON.parse(localStorage['bookmarks']);
+      this.displayedColumns = ['id', 'date_bookmark', 'tag'];
+      this.dataSource = this.ELEMENT_DATA;
+      this.loading = false;
+    }, 600);
+  }
+
   start() {
     this.api.getIntervalRows(this.id, this.limit);
 
@@ -88,12 +98,7 @@ export class AppComponent implements OnInit {
       this.api.getCountRows();
     }, 300);
 
-    setTimeout(() => {
-      this.ELEMENT_DATA = JSON.parse(localStorage['bookmarks']);
-      this.displayedColumns = ['id', 'date_bookmark', 'tag'];
-      this.dataSource = this.ELEMENT_DATA;
-      this.loading = false;
-    }, 600);
+    this.redrawing();
   }
 
   onChanged(pageEvent: object) {
@@ -105,6 +110,7 @@ export class AppComponent implements OnInit {
 
   onChangedForButtonOk(pageEvent: boolean) {
     if (pageEvent) {
+      this.redrawing();
       this.showAddBookMarkButton = true;
       this.showAddBookMark = false;
       this.bookmarkShow = false;
