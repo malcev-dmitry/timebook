@@ -9,7 +9,11 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  public postRows( url: string): Observable<any> {
+  public getData( url: string): Observable<any> {
     return this.http.get(url);
+  }
+
+  public postData( url: string, dataContent: string): Observable<any> {
+    return this.http.post(url, dataContent);
   }
 }
