@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
 
 # Preview
-![](https://github.com/malcev-dmitry/bookmark/blob/master/src/assets/images/preview.gif)
+![](https://github.com/malcev-dmitry/timebook/blob/master/src/assets/images/preview.gif)
 
 ## Development server
 
