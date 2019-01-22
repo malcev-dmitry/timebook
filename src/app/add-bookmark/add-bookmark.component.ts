@@ -21,8 +21,8 @@ export class AddBookmarkComponent implements OnInit {
 
   priorityDefault: number = 1;
 
-  onBack() {
-    this.onChanged.emit(true);
+  onBack(type: boolean) {
+    this.onChanged.emit(type ? true : false);
   }
 
   onChange(mrChange: MatRadioChange) {
@@ -38,9 +38,8 @@ export class AddBookmarkComponent implements OnInit {
     // подмена значения, иначе так и останется старое
     this.options.value['priority'] = this.priorityDefault;
     this.api.addRow(this.options.value);
-    this.api.getCountRows();
     this.api.getIntervalRows(this.pageEventParent['pageIndex'] * this.pageEventParent['pageSize'], this.pageEventParent['pageSize']);
-    this.onBack();
+    this.onBack(true);
   }
 
   ngOnInit() {

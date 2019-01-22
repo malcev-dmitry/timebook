@@ -112,13 +112,13 @@ export class AppComponent implements OnInit {
     if (pageEvent) {
       setTimeout(() => { this.editDate(); this.api.getCountRows(); }, 300);
       this.redrawing();
-      this.showAddBookMarkButton = true;
-      this.showAddBookMark = false;
-      this.bookmarkShow = false;
-      this.deleteButton = true;
-      this.backButton = false;
-      this.loading = false;
     }
+    this.showAddBookMarkButton = true;
+    this.showAddBookMark = false;
+    this.bookmarkShow = false;
+    this.deleteButton = true;
+    this.backButton = false;
+    this.loading = false;
   }
 
   ngOnInit() {
