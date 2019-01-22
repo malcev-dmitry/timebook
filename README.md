@@ -15,6 +15,9 @@ Disable origin policy in Chrome:
 
 Run google chrome linux comand: google-chrome --disable-web-security --user-data-dir="[some directory here]"
 
+backend находится в отдельном репозитории: https://github.com/malcev-dmitry/apiRest.git
+Его необходимо скачать и запустить через npm run start
+
 # Задание
 
 Создать приложение - записную книжку разработчика.
