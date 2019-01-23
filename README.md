@@ -5,23 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Preview
 ![](https://github.com/malcev-dmitry/timebook/blob/master/src/assets/images/preview.gif)
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-# Requirements
-
-Disable origin policy in Chrome:
-
-Run google chrome linux comand: google-chrome --disable-web-security --user-data-dir="[some directory here]"
-
-backend находится в отдельном репозитории: https://github.com/malcev-dmitry/apiRest.git
-Его необходимо скачать и запустить через npm run start
-
-Должен быть установлен Mysql
-
-БД: https://github.com/malcev-dmitry/timebook/blob/master/src/assets/api.sql
-
 # Задание
 
 Создать приложение - записную книжку разработчика.
@@ -33,6 +16,40 @@ backend находится в отдельном репозитории: https:/
 
 При реализации использовать:
 angular6+, angular material 6+
+
+# Настройка
+
+Необходимо запустить браузер без политики безопасности, т.к.взаимодействие с API происходит
+без https. Для Google Chrome каманда Linux: 
+
+google-chrome --disable-web-security --user-data-dir="[some directory here]"
+
+Api находится в отдельном репозитории: 
+
+https://github.com/malcev-dmitry/apiRest.git
+
+Его нужно отдельно запустить через:
+
+npm run start
+
+Должен быть установлен Mysql. Для удобства работы с бд стоит установить phpMyAdmin, через
+него же експортировать БД:
+
+https://github.com/malcev-dmitry/timebook/blob/master/src/assets/api.sql
+
+Чтобы убедиться в успешной установке, вставьте в url браузера:
+
+localhost:4201/count
+
+Если на экране отобразился ответ подобного вида "[{"rowsCount":13}]", значит все ок.
+
+Далее устанавливаете само приложение командой:
+
+npm install
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
