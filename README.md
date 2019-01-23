@@ -28,7 +28,11 @@ Api находится в отдельном репозитории:
 
 https://github.com/malcev-dmitry/apiRest.git
 
-Его нужно отдельно запустить через:
+Нужно установить пакеты:
+
+npm install
+
+Затем отдельно запустить через:
 
 npm run start
 
@@ -46,6 +50,10 @@ localhost:4201/count
 Далее устанавливаете само приложение командой:
 
 npm install
+
+И запускайте:
+
+npm run start
 
 ## Development server
 
