@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { PromptComponent } from './prompt/prompt.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material';
     LoadingComponent,
     PaginatorComponent,
     BookmarkComponent,
-    AddBookmarkComponent
+    AddBookmarkComponent,
+    PromptComponent
   ],
   imports: [
     BrowserModule,

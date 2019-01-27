@@ -16,11 +16,16 @@ export class AppComponent implements OnInit {
 
   // видимость элементов
   loading: boolean = true;
+  showTable: boolean = true;
+  showPrompt: boolean = false;
   bookmarkShow: boolean = false;
   showAddBookMark: boolean = false;
   showAddBookMarkButton: boolean = true;
+  showPaginator: boolean = true;
   deleteButton: boolean = true;
   backButton: boolean = false;
+
+  titlePrompt: string;
 
   rowId: number;
 
@@ -53,10 +58,12 @@ export class AppComponent implements OnInit {
 
   getRowId(rowIdLocalStorage: number) {
     this.rowId = rowIdLocalStorage;
-    this.loading = true;
+    this.showTable = false;
+    this.showPrompt = false;
     this.bookmarkShow = true;
     this.showAddBookMark = false;
     this.showAddBookMarkButton = false;
+    this.showPaginator = false;
     this.deleteButton = true;
     this.backButton = true;
   }
@@ -64,19 +71,35 @@ export class AppComponent implements OnInit {
   back() {
     this.showAddBookMarkButton = true;
     this.showAddBookMark = false;
+    this.showPaginator = true;
     this.bookmarkShow = false;
     this.deleteButton = true;
     this.backButton = false;
+    this.showTable = true;
     this.loading = false;
   }
 
   addBookMark() {
     this.showAddBookMarkButton = false;
     this.showAddBookMark = true;
+    this.showPaginator = false;
     this.bookmarkShow = false;
     this.deleteButton = false;
     this.backButton = false;
+    this.showTable = false;
     this.loading = false;
+  }
+
+  onDelete() {
+    this.showAddBookMark = false;
+    this.showPaginator = false;
+    this.bookmarkShow = false;
+    this.deleteButton = false;
+    this.backButton = false;
+    this.showPrompt = true;
+    this.showTable = false;
+    this.loading = false;
+    this.titlePrompt = 'Вы действительно хотите удалить заметку';
   }
 
   redrawing() {
@@ -115,9 +138,11 @@ export class AppComponent implements OnInit {
     }
     this.showAddBookMarkButton = true;
     this.showAddBookMark = false;
+    this.showPaginator = true;
     this.bookmarkShow = false;
     this.deleteButton = true;
     this.backButton = false;
+    this.showTable = true;
     this.loading = false;
   }
 

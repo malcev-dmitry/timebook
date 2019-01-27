@@ -1,5 +1,5 @@
-<div *ngIf="!showAddBookMark">
-  <div *ngIf="loading && !bookmarkShow">
+<div *ngIf="showTable">
+  <div *ngIf="loading">
     <app-loading></app-loading>
   </div>
 
@@ -24,13 +24,15 @@
   getColor(i) == 1 ?'#FCB2AC' : getColor(i) == 2 ? '#F9F9AE' : '#CBFFBD'}"></tr>
 
   </table><br>
-
-  <app-bookmark *ngIf="bookmarkShow" [rowId]="rowId"></app-bookmark>
-
-  <app-paginator *ngIf="!bookmarkShow" (onChanged)="onChanged($event)" [pageEventParent]="pageEvent"></app-paginator><br>
 </div>
 
+<app-bookmark *ngIf="bookmarkShow" [rowId]="rowId"></app-bookmark>
+
+<app-paginator *ngIf="showPaginator" (onChanged)="onChanged($event)" [pageEventParent]="pageEvent"></app-paginator><br>
+
 <app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)" [pageEventParent]="pageEvent"></app-add-bookmark>
+
+<app-prompt *ngIf="showPrompt" [rowId]="rowId" [titlePrompt]="titlePrompt"></app-prompt>
 
 <div class="buttonPosition">
   <button mat-raised-button *ngIf="showAddBookMarkButton" (click)="addBookMark()">
@@ -42,7 +44,7 @@
   <button mat-raised-button *ngIf="bookmarkShow">
     <img class="imgButton" src="../assets/images/edit.svg" alt="">
   </button>
-  <button mat-raised-button *ngIf="deleteButton">
+  <button mat-raised-button *ngIf="deleteButton" (click)="onDelete()">
     <img class="imgButton" src="../assets/images/delete.svg" alt="">
   </button>
 </div>
