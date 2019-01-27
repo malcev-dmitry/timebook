@@ -1,0 +1,15 @@
+<div class="content__cap" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<div *ngIf='titlePrompt' class="prompt">
+  <span>{{titlePrompt}}</span>
+
+  <button mat-raised-button (click)="onCancel()" type="submit">
+    <img class="imgButton" src="../../assets/images/back.svg" alt="">
+  </button>
+
+  <button mat-raised-button (click)="onOk()">
+    <img class="imgButton" src="../../assets/images/ok.svg" alt="">
+  </button>
+</div>
