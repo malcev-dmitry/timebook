@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { ApiService } from '../apiService';
 
 @Component({
   selector: 'app-prompt',
@@ -6,26 +7,31 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./prompt.component.scss']
 })
 export class PromptComponent implements OnInit {
-  @Input() rowId: number;
+  @Output() onChanged = new EventEmitter<boolean>();
+  @Input() rowId: number[];
   @Input() titlePrompt: string;
 
-  constructor() { }
+  constructor(private api: ApiService) {}
 
-  loading: boolean = true;
+  showDeleteButton: boolean = true;
 
-  onOk() {
-    console.log(this.rowId);
+  back() {
+    this.onChanged.emit(true);
   }
 
-  onCancel() {
-    console.log(this.titlePrompt);
+  onDelete() {
+    const idsDelete: number[] = [];
+    // из localstorage получаем реальные id строк и добавляем в массив
+    for (let i = 0; i < this.rowId.length; i++) {
+      idsDelete.push(JSON.parse(localStorage['bookmarks'])[this.rowId[i]]['id']);
+    }
+    this.api.DeleteRows(idsDelete);
+    this.onChanged.emit(true);
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.loading = false;
-      console.log(this.rowId);
-      console.log(this.titlePrompt);
-    }, 500);
+    if (this.rowId.length === 0) {
+      this.showDeleteButton = false;
+    }
   }
 }

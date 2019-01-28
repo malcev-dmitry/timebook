@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
   titlePrompt: string;
 
-  rowId: number;
+  rowId: number[] = [];
 
   // default for select bd
   id: number = 0;
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   getRowId(rowIdLocalStorage: number) {
-    this.rowId = rowIdLocalStorage;
+    this.rowId.push(rowIdLocalStorage);
     this.showTable = false;
     this.showPrompt = false;
     this.bookmarkShow = true;
@@ -75,8 +75,10 @@ export class AppComponent implements OnInit {
     this.bookmarkShow = false;
     this.deleteButton = true;
     this.backButton = false;
+    this.showPrompt = false;
     this.showTable = true;
     this.loading = false;
+    this.rowId.length = 0;
   }
 
   addBookMark() {
@@ -90,7 +92,8 @@ export class AppComponent implements OnInit {
     this.loading = false;
   }
 
-  onDelete() {
+  onEdit() {
+    this.showAddBookMarkButton = false;
     this.showAddBookMark = false;
     this.showPaginator = false;
     this.bookmarkShow = false;
@@ -99,7 +102,27 @@ export class AppComponent implements OnInit {
     this.showPrompt = true;
     this.showTable = false;
     this.loading = false;
-    this.titlePrompt = 'Вы действительно хотите удалить заметку';
+    this.rowId.length = 0;
+    this.titlePrompt = 'На данный момент данная операция нереализована';
+  }
+
+  onDelete() {
+    this.showAddBookMarkButton = false;
+    this.showAddBookMark = false;
+    this.showPaginator = false;
+    this.bookmarkShow = false;
+    this.deleteButton = false;
+    this.backButton = false;
+    this.showPrompt = true;
+    this.showTable = false;
+    this.loading = false;
+
+    if (this.rowId.length === 0) {
+      this.titlePrompt = 'На данный момент, чтобы удалить заметку, необходимо кликнуть на нее, а затем удалить';
+      return;
+    }
+
+    this.titlePrompt = 'Вы действительно хотите удалить заметку?';
   }
 
   redrawing() {
@@ -129,6 +152,21 @@ export class AppComponent implements OnInit {
     this.limit = pageEvent['pageSize'];
     this.pageEvent = pageEvent;
     this.start();
+  }
+
+  onChangedPrompt(pageEvent: boolean) {
+    if (pageEvent) {
+      this.pageEvent = {'previousPageIndex' : 0, 'pageIndex' : 0, 'pageSize' : this.limit};
+      this.showAddBookMarkButton = true;
+      this.showPaginator = true;
+      this.deleteButton = true;
+      this.backButton = false;
+      this.showPrompt = false;
+      this.showTable = true;
+      this.loading = true;
+      this.rowId.length = 0;
+      this.onChanged(this.pageEvent);
+    }
   }
 
   onChangedForButtonOk(pageEvent: boolean) {

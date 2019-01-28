@@ -1,8 +1,8 @@
-<div *ngIf="showTable">
-  <div *ngIf="loading">
-    <app-loading></app-loading>
-  </div>
+<div *ngIf="loading">
+  <app-loading></app-loading>
+</div>
 
+<div *ngIf="showTable">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!loading">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -32,19 +32,19 @@
 
 <app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)" [pageEventParent]="pageEvent"></app-add-bookmark>
 
-<app-prompt *ngIf="showPrompt" [rowId]="rowId" [titlePrompt]="titlePrompt"></app-prompt>
+<app-prompt *ngIf="showPrompt" [rowId]="rowId" [titlePrompt]="titlePrompt" (onChanged)="onChangedPrompt($event)"></app-prompt>
 
 <div class="buttonPosition">
-  <button mat-raised-button *ngIf="showAddBookMarkButton" (click)="addBookMark()">
+  <button mat-raised-button *ngIf="showAddBookMarkButton" (click)="addBookMark()" class="button">
     <img class="imgButton" src="../assets/images/add.svg" alt="">
   </button>
-  <button mat-raised-button *ngIf="backButton" (click)="back()">
+  <button mat-raised-button *ngIf="backButton" (click)="back()" class="button">
     <img class="imgButton" src="../assets/images/back.svg" alt="">
   </button>
-  <button mat-raised-button *ngIf="bookmarkShow">
+  <button mat-raised-button *ngIf="bookmarkShow" (click)="onEdit()" class="button">
     <img class="imgButton" src="../assets/images/edit.svg" alt="">
   </button>
-  <button mat-raised-button *ngIf="deleteButton" (click)="onDelete()">
+  <button mat-raised-button *ngIf="deleteButton" (click)="onDelete()" class="button">
     <img class="imgButton" src="../assets/images/delete.svg" alt="">
   </button>
 </div>
