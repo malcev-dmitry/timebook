@@ -1,15 +1,13 @@
-<div class="content__cap" *ngIf="loading">
-  <app-loading></app-loading>
-</div>
-
-<div *ngIf='titlePrompt' class="prompt">
+<div *ngIf='titlePrompt' class="bookmarkAndPrompt color">
   <span>{{titlePrompt}}</span>
+</div><br>
 
-  <button mat-raised-button (click)="onCancel()" type="submit">
+<div class="buttonPosition">
+  <button mat-raised-button (click)="back()" class="button">
     <img class="imgButton" src="../../assets/images/back.svg" alt="">
   </button>
 
-  <button mat-raised-button (click)="onOk()">
-    <img class="imgButton" src="../../assets/images/ok.svg" alt="">
+  <button mat-raised-button (click)="onDelete()" class="button" *ngIf="showDeleteButton">
+    <img class="imgButton" src="../../assets/images/delete.svg" alt="">
   </button>
 </div>

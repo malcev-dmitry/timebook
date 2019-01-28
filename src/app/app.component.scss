@@ -1,11 +1,11 @@
 $sizeButton: 100px;
 
-table, mat-paginator, mat-paginator, .buttonPosition {
+table, mat-paginator, mat-paginator {
   width: 50%;
   margin: auto;
 }
 @media screen and (min-width: 320px ) and (max-width:768px) {
-  table, mat-paginator, mat-paginator, .buttonPosition {
+  table, mat-paginator, mat-paginator {
     width: 100%;
   }
 }
@@ -22,13 +22,6 @@ tr:active {
   background-color: #557ccc !important;
 }
 
-button {
-  background-color: #ffe19f !important;
-  font-size: 60px;
-  width: 100px;
-  height: 70px;
-}
-
 mat-paginator {
   background-color: #FDDAA5 !important;
   border-radius: 20px !important;
@@ -40,10 +33,5 @@ mat-paginator {
 
 .textLeft {
   text-align: left;
-}
-
-.buttonPosition {
-  display: flex;
-  justify-content: space-between;
 }
 
