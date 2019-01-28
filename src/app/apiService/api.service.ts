@@ -56,4 +56,19 @@ export class ApiService {
 
     return subject;
   }
+
+  public DeleteRows(data: number[]): Observable<any> {
+    const substring = '/del';
+    const subject = new Subject();
+    const url = this.apiUrl + substring;
+
+    this.http.deleteData(url, data)
+      .subscribe((response) => {
+        subject.next(response);
+      }, (error) => {
+        subject.error(error);
+      });
+
+    return subject;
+  }
 }

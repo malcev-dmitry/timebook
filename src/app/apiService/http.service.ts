@@ -16,4 +16,8 @@ export class HttpService {
   public postData( url: string, dataContent: string): Observable<any> {
     return this.http.post(url, dataContent);
   }
+
+  public deleteData( url: string, dataContent: number[]): Observable<any> {
+    return this.http.post(url, dataContent);
+  }
 }
