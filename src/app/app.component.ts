@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   titlePrompt: string;
 
   rowId: number[] = [];
+  rowsId: object = {};
 
   // default for select bd
   id: number = 0;
@@ -107,6 +108,8 @@ export class AppComponent implements OnInit {
   }
 
   onDelete() {
+    const checkboxIds = Object.keys(this.rowsId);
+
     this.showAddBookMarkButton = false;
     this.showAddBookMark = false;
     this.showPaginator = false;
@@ -117,12 +120,27 @@ export class AppComponent implements OnInit {
     this.showTable = false;
     this.loading = false;
 
-    if (this.rowId.length === 0) {
-      this.titlePrompt = 'На данный момент, чтобы удалить заметку, необходимо кликнуть на нее, а затем удалить';
+    if (this.rowId.length === 0 && checkboxIds.length === 0) {
+      this.titlePrompt = 'Кликните или поставьте отметку(и) на той(тех) заметках, которые нужно удалить';
       return;
     }
 
-    this.titlePrompt = 'Вы действительно хотите удалить заметку?';
+    if (checkboxIds.length !== 0) {
+      for (let i = 0; i < checkboxIds.length; i++) {
+        this.rowId.push(+checkboxIds[i]);
+      }
+    }
+
+    this.titlePrompt = `Вы действительно хотите удалить (${this.rowId.length}) заметок`;
+  }
+
+  // добавляет объекту уникальные свойства(id)
+  onChangedCheckbox(rowIdLocalStorage: number) {
+    if (rowIdLocalStorage in this.rowsId) {
+      delete this.rowsId[rowIdLocalStorage];
+    } else {
+      this.rowsId[rowIdLocalStorage] = true;
+    }
   }
 
   redrawing() {
@@ -165,6 +183,9 @@ export class AppComponent implements OnInit {
       this.showTable = true;
       this.loading = true;
       this.rowId.length = 0;
+
+      this.rowsId = {};
+
       this.onChanged(this.pageEvent);
     }
   }
