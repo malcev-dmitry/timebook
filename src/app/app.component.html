@@ -6,7 +6,10 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!loading">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element; let i = index"><mat-checkbox (click)="onChangedCheckbox(i)" ></mat-checkbox></td>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <mat-checkbox (click)="onChangedCheckbox(i)">
+        </mat-checkbox>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="date_bookmark">

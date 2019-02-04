@@ -169,6 +169,7 @@ export class AppComponent implements OnInit {
     this.id = pageEvent['pageIndex'] * pageEvent['pageSize'];
     this.limit = pageEvent['pageSize'];
     this.pageEvent = pageEvent;
+    this.rowsId = {};
     this.start();
   }
 
