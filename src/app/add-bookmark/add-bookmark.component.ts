@@ -13,6 +13,9 @@ export class AddBookmarkComponent implements OnInit {
   @Output() onChanged = new EventEmitter<boolean>();
   @Output() change: EventEmitter<MatRadioChange>;
   @Input() pageEventParent: PageEvent;
+  @Input() rowId: number[];
+
+  data: object = {};
 
   options: FormGroup;
   submitted = false;
@@ -49,6 +52,10 @@ export class AddBookmarkComponent implements OnInit {
       priority: this.priorityDefault,
       date_bookmark: ['', Validators.required]
     });
+
+    setTimeout(() => {
+      this.data = this.rowId ? JSON.parse(localStorage['bookmarks'])[this.rowId[0]] : null;
+    }, 200);
   }
 
   get f() { return this.options.controls; }

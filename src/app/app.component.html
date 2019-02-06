@@ -33,7 +33,11 @@
 
 <app-paginator *ngIf="showPaginator" (onChanged)="onChanged($event)" [pageEventParent]="pageEvent"></app-paginator><br>
 
-<app-add-bookmark *ngIf="showAddBookMark" (onChanged)="onChangedForButtonOk($event)" [pageEventParent]="pageEvent"></app-add-bookmark>
+<app-add-bookmark *ngIf="showAddBookMark"
+                  (onChanged)="onChangedForButtonOk($event)"
+                  [pageEventParent]="pageEvent"
+                  [rowId]="rowId"
+></app-add-bookmark>
 
 <app-prompt *ngIf="showPrompt" [rowId]="rowId" [titlePrompt]="titlePrompt" (onChanged)="onChangedPrompt($event)"></app-prompt>
 

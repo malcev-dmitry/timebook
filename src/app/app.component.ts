@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
       shortDate = new Date(data[key]['date_bookmark']);
       data[key]['date_bookmark'] = `${shortDate.getDate()}
       ${month[shortDate.getMonth()]} ${shortDate.getFullYear()} г.`;
+      data[key]['date_originally'] = shortDate;
     }
     // скопировали данные в localstorage, изменили дату, перезаписали localstorage
     localStorage.removeItem('date_bookmark');
@@ -95,16 +96,13 @@ export class AppComponent implements OnInit {
 
   onEdit() {
     this.showAddBookMarkButton = false;
-    this.showAddBookMark = false;
+    this.showAddBookMark = true;
     this.showPaginator = false;
     this.bookmarkShow = false;
     this.deleteButton = false;
     this.backButton = false;
-    this.showPrompt = true;
     this.showTable = false;
     this.loading = false;
-    this.rowId.length = 0;
-    this.titlePrompt = 'На данный момент данная операция нереализована';
   }
 
   onDelete() {
@@ -204,6 +202,7 @@ export class AppComponent implements OnInit {
     this.backButton = false;
     this.showTable = true;
     this.loading = false;
+    this.rowId.length = 0;
   }
 
   ngOnInit() {
