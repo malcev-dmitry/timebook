@@ -71,4 +71,19 @@ export class ApiService {
 
     return subject;
   }
+
+  public UpdateRow(id: string, data: string): Observable<any> {
+    const substring = '/bookmarks/update/' + id;
+    const subject = new Subject();
+    const url = this.apiUrl + substring;
+
+    this.http.postData(url, data)
+      .subscribe((response) => {
+        subject.next(response);
+      }, (error) => {
+        subject.error(error);
+      });
+
+    return subject;
+  }
 }
