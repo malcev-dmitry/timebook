@@ -58,7 +58,11 @@ export class AddBookmarkComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.data = this.rowId ? JSON.parse(localStorage['bookmarks'])[this.rowId[0]] : null;
+      if (this.rowId.length) {
+        this.data = JSON.parse(localStorage['bookmarks'])[this.rowId[0]];
+      } else {
+        this.data = null;
+      }
     }, 200);
   }
 

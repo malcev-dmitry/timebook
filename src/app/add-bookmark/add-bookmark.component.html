@@ -4,9 +4,9 @@
     <div>
       <label>Приоритет</label>
       <mat-radio-group name="priority" (change)="onChange($event)">
-        <mat-radio-button value="1" [checked]="rowId ? data['priority'] === 1 ? true : false : true">Высокий</mat-radio-button>
-        <mat-radio-button value="2" [checked]="rowId ? data['priority'] === 2 ? true : false : false">Средний</mat-radio-button>
-        <mat-radio-button value="3" [checked]="rowId ? data['priority'] === 3 ? true : false : false">Низкий</mat-radio-button>
+        <mat-radio-button value="1" [checked]="rowId.length ? data['priority'] === 1 : true">Высокий</mat-radio-button>
+        <mat-radio-button value="2" [checked]="rowId.length ? data['priority'] === 2 : false">Средний</mat-radio-button>
+        <mat-radio-button value="3" [checked]="rowId.length ? data['priority'] === 3 : false">Низкий</mat-radio-button>
       </mat-radio-group>
     </div>
 
@@ -15,7 +15,7 @@
              type="text"
              formControlName="tag"
              placeholder="Тег"
-             value="{{rowId ? data['tag'] : ''}}"
+             value="{{rowId.length ? data['tag'] : ''}}"
              [ngClass]="{ 'is-invalid': submitted && f.tag.errors }" required>
       <div *ngIf="submitted && f.tag.errors" class="invalid-feedback">
         <div *ngIf="f.tag.errors.required">Корректно заполните поле Тег</div>
@@ -27,7 +27,7 @@
              type="text"
              formControlName="title"
              placeholder="Заметка"
-             value="{{rowId ? data['title'] : ''}}"
+             value="{{rowId.length ? data['title'] : ''}}"
              [ngClass]="{ 'is-invalid': submitted && f.title.errors }" required>
       <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
         <div *ngIf="f.title.errors.required">Корректно заполните поле Заметка</div>
@@ -39,7 +39,7 @@
              formControlName="date_bookmark"
              [matDatepicker]="picker"
              placeholder="Дата"
-             value="{{rowId ? data['date_originally'] : null}}"
+             value="{{rowId.length ? data['date_originally'] : null}}"
              [ngClass]="{ 'is-invalid': submitted && f.date_bookmark.errors }" required>
       <div *ngIf="submitted && f.date_bookmark.errors" class="invalid-feedback">
         <div *ngIf="f.date_bookmark.errors.required">Корректно заполните поле Дата</div>
