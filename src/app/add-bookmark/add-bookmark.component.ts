@@ -40,7 +40,7 @@ export class AddBookmarkComponent implements OnInit {
     }
     // подмена значения, иначе так и останется старое
     this.options.value['priority'] = this.priorityDefault;
-    if (this.rowId) {
+    if (this.rowId.length) {
       this.api.UpdateRow(this.data['id'], this.options.value);
     } else {
       this.api.addRow(this.options.value);
